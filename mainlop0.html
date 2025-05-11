@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Support Lumina RP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Fira+Mono&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      background: #0d1224;
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      color: #fff;
+    }
+    body {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    #bg-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background: #0d1224;
+    }
+    header {
+      margin-bottom: 28px;
+      text-align: center;
+      z-index: 2;
+      color: #ffe066;
+    }
+    .logo-support {
+      width: 54px; height: 54px;
+      vertical-align: middle;
+      margin-right: 12px;
+      filter: drop-shadow(0 2px 10px #ffe066aa);
+      animation: logoPop 1.2s cubic-bezier(.2,2,.6,1);
+    }
+    @keyframes logoPop {
+      0% { transform: scale(0.6); opacity: 0; }
+      80% { transform: scale(1.07); opacity: 1;}
+      100% { transform: scale(1); }
+    }
+    header h1 {
+      display: inline-block;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #ffe066;
+      letter-spacing: 2px;
+      margin: 0;
+      vertical-align: middle;
+      text-shadow: 0 0 12px #ffe066cc;
+    }
+    .subtitle {
+      margin-top: 8px;
+      color: #fff8;
+      font-size: 1.1rem;
+      font-family: 'Fira Mono', monospace;
+      letter-spacing: 1px;
+      opacity: 0.85;
+    }
+    .support-card {
+      background: rgba(255, 224, 102, 0.1);
+      box-shadow: 0 0 40px 0 #ffe066aa;
+      border-radius: 24px;
+      padding: 34px 32px 28px 32px;
+      max-width: 600px;
+      width: 95vw;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      z-index: 2;
+      backdrop-filter: blur(12px) saturate(1.2);
+      border: 1.5px solid #ffe066aa;
+      animation: fadeInCard 1.2s cubic-bezier(.2,2,.6,1);
+      color: #ffe066;
+    }
+    @keyframes fadeInCard {
+      0% { opacity: 0; transform: translateY(32px);}
+      100% { opacity: 1; transform: none;}
+    }
+    .support-card label {
+      color: #ffe066 !important;
+      text-shadow: 0 0 12px #ffe066cc, 0 0 2px #0d1224;
+      display: block;
+      margin-bottom: 7px;
+      margin-top: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .support-card label:first-child {
+      margin-top: 0;
+    }
+    .input-row > div label {
+      margin-top: 0;
+    }
+    input, textarea, select {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1.08rem;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      background: rgba(255,255,255,0.9);
+      color: #23293a;
+      transition: box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 2px 8px #ffe06644;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: text;
+    }
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2014%2014%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M4%206l3%203%203-3%22%20stroke%3D%22%23333%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 14px 14px;
+    }
+    input:focus, textarea:focus, select:focus {
+      background: #fff;
+      box-shadow: 0 0 0 2.5px #ffe066cc;
+    }
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+      font-size: 1.07rem;
+      cursor: text;
+    }
+    .input-row {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+    }
+    .input-row > div {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    button {
+      background: linear-gradient(90deg, #ffe066 60%, #ffcc00 100%);
+      color: #23293a;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 0;
+      font-size: 1.13rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 12px #ffcc0044;
+      letter-spacing: 1px;
+      margin-top: 6px;
+      transition: background 0.18s, transform 0.13s;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+      user-select: none;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #ffdb4d 60%, #ffd633 100%);
+    }
+    button:active {
+      transform: scale(0.98);
+      background: linear-gradient(90deg, #ffd633 0%, #ffdb4d 100%);
+    }
+    button .btn-ico {
+      width: 24px; height: 24px;
+      vertical-align: middle;
+      margin-right: 8px;
+      filter: drop-shadow(0 1px 2px #fff8);
+    }
+    .feedback {
+      margin-top: 10px;
+      padding: 13px 10px;
+      border-radius: 10px;
+      font-size: 1.08rem;
+      text-align: center;
+      font-family: 'Fira Mono', monospace;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 10px #fff3;
+      animation: fadeInCard 0.8s;
+      user-select: none;
+      background: #fff9c4;
+      border: 1.5px solid #ffeb3b;
+      color: #ffe066 !important;
+      text-shadow: 0 0 8px #ffe066cc;
+    }
+    .success { background: #e4ffe0; color: #237b1f !important; border-color: #b7eab0; text-shadow: none;}
+    .error { background: #ffe4e4; color: #b22222 !important; border-color: #eab0b0; text-shadow: none;}
+    .info { background: #e0e6f1; color: #4f7cff !important; border-color: #a7b8ff; text-shadow: none;}
+    .tips {
+      font-size: 0.97rem;
+      opacity: 0.85;
+      margin-top: 8px;
+      font-family: 'Fira Mono', monospace;
+      text-align: center;
+      user-select: none;
+      text-shadow: 0 0 8px #ffe066cc;
+      color: #ffe066 !important;
+    }
+    @media (max-width: 700px) {
+      .support-card { max-width: 97vw; }
+    }
+    @media (max-width: 600px) {
+      .support-card { padding: 18px 6vw 16px 6vw; }
+      header h1 { font-size: 1.8rem;}
+      .logo-support { width: 36px; height: 36px;}
+      .input-row { flex-direction: column; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <header>
+    <svg class="logo-support" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <circle cx="32" cy="32" r="32" fill="#ffe066"/>
+      <path d="M21 37c0 2.5 2.5 4.5 5.5 4.5h11c3 0 5.5-2 5.5-4.5V26c0-2.5-2.5-4.5-5.5-4.5h-11C23.5 21.5 21 23.5 21 26v11z" fill="#23293a"/>
+      <ellipse cx="32" cy="32.5" rx="3.5" ry="2.5" fill="#ffe066"/>
+      <circle cx="27.5" cy="31" r="1.5" fill="#23293a"/>
+      <circle cx="36.5" cy="31" r="1.5" fill="#23293a"/>
+    </svg>
+    <h1>Support Lumina RP</h1>
+    <div class="subtitle">Besoin d'aide ? Notre équipe est à votre écoute.<br>
+      <span>Expliquez-nous votre problème, il sera transmis directement à notre serveur Discord.</span>
+    </div>
+  </header>
+  <form class="support-card" id="support-form" autocomplete="off" novalidate>
+    <label for="problem-type">Type de problème <span style="color:#b22222;">*</span></label>
+    <select id="problem-type" name="problem-type" required>
+      <option value="" disabled selected hidden>-- Sélectionnez un type --</option>
+      <option value="Problème session">🕒 Problème session</option>
+      <option value="Problème technique">⚙️ Problème technique</option>
+      <option value="Signaler joueur">🚩 Signaler joueur</option>
+      <option value="Recrutement">🎯 Recrutement</option>
+      <option value="Autre">❓ Autre</option>
+    </select>
+    <div class="input-row">
+      <div>
+        <label for="pseudo">Pseudo Discord <span style="color:#b22222;">*</span></label>
+        <input type="text" id="pseudo" name="pseudo" maxlength="32" placeholder="Ex: MonPseudo" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+      </div>
+      <div>
+        <label for="fortnite">Pseudo Fortnite <span style="color:#b22222;">*</span></label>
+        <input type="text" id="fortnite" name="fortnite" maxlength="32" placeholder="Ex: MonPseudoFN" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+      </div>
+    </div>
+    <label for="problem">Décris ton problème <span style="color:#b22222;">*</span></label>
+    <textarea id="problem" name="problem" required placeholder="Explique ici ce dont tu as besoin..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <button type="submit" aria-label="Envoyer au support">
+      <svg class="btn-ico" viewBox="0 0 24 24" fill="none"><path d="M2 21l21-9-21-9v7l15 2-15 2v7z" fill="#23293a"/></svg>
+      Envoyer au support
+    </button>
+    <div class="tips" aria-live="polite">
+      <span>⚡️ Le support vous répondra sur Discord dès que possible.</span>
+    </div>
+    <div id="feedback" role="alert" aria-live="assertive"></div>
+  </form>
+  <script>
+    // Particules interactives
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 150 };
+
+    function initCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+
+    class Particle {
+      constructor(x, y, size, speedX, speedY) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.baseX = x;
+        this.baseY = y;
+      }
+      draw() {
+        ctx.fillStyle = '#ffe066';
+        ctx.shadowColor = '#ffe066';
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+      update() {
+        // Move particle
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Bounce off edges
+        if (this.x + this.size > width || this.x - this.size < 0) this.speedX = -this.speedX;
+        if (this.y + this.size > height || this.y - this.size < 0) this.speedY = -this.speedY;
+
+        // Mouse interaction - repel particles
+        if (mouse.x && mouse.y) {
+          let dx = this.x - mouse.x;
+          let dy = this.y - mouse.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            let angle = Math.atan2(dy, dx);
+            let force = (mouse.radius - dist) / mouse.radius;
+            let repulseX = Math.cos(angle) * force * 3;
+            let repulseY = Math.sin(angle) * force * 3;
+            this.x += repulseX;
+            this.y += repulseY;
+          }
+        }
+      }
+    }
+
+    function createParticles() {
+      particles = [];
+      const count = Math.floor((width * height) / 7000);
+      for (let i = 0; i < count; i++) {
+        let size = Math.random() * 2 + 1;
+        let x = Math.random() * (width - size * 2) + size;
+        let y = Math.random() * (height - size * 2) + size;
+        let speedX = (Math.random() - 0.5) * 0.5;
+        let speedY = (Math.random() - 0.5) * 0.5;
+        particles.push(new Particle(x, y, size, speedX, speedY));
+      }
+    }
+
+    function connectParticles() {
+      let maxDistance = 120;
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a + 1; b < particles.length; b++) {
+          let dx = particles[a].x - particles[b].x;
+          let dy = particles[a].y - particles[b].y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < maxDistance) {
+            ctx.strokeStyle = `rgba(255, 224, 102, ${1 - dist / maxDistance})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      connectParticles();
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      initCanvas();
+      createParticles();
+    });
+
+    window.addEventListener('mousemove', e => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseout', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    // Initial setup
+    initCanvas();
+    createParticles();
+    animate();
+
+    // Blacklist check
+    function containsBlacklisted(str) {
+      if (!str) return false;
+      const s = str.toLowerCase();
+      return s.includes("@everyone") || s.includes("@here");
+    }
+
+    // Form submission with cooldown (5 minutes)
+    const COOLDOWN_MS = 5 * 60 * 1000;
+    const COOLDOWN_KEY = "support_last_request";
+
+    function getCooldownRemaining() {
+      const last = parseInt(localStorage.getItem(COOLDOWN_KEY) || "0", 10);
+      const now = Date.now();
+      return Math.max(0, last + COOLDOWN_MS - now);
+    }
+
+    const form = document.getElementById('support-form');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const feedback = document.getElementById('feedback');
+      feedback.textContent = "";
+      feedback.className = "";
+
+      // Cooldown check
+      const cooldown = getCooldownRemaining();
+      if (cooldown > 0) {
+        const min = Math.floor(cooldown / 60000);
+        const sec = Math.floor((cooldown % 60000) / 1000);
+        feedback.textContent = `⏳ Merci d'attendre ${min ? min + " min " : ""}${sec} sec avant de refaire une demande.`;
+        feedback.className = "feedback error";
+        return;
+      }
+
+      const problemTypeSelect = document.getElementById('problem-type');
+      const problemType = problemTypeSelect.value.trim();
+      const pseudo = document.getElementById('pseudo').value.trim();
+      const fortnite = document.getElementById('fortnite').value.trim();
+      const problem = document.getElementById('problem').value.trim();
+
+      if (
+        containsBlacklisted(problemType) ||
+        containsBlacklisted(pseudo) ||
+        containsBlacklisted(fortnite) ||
+        containsBlacklisted(problem)
+      ) {
+        feedback.textContent = "❌ L'utilisation de '@everyone' ou '@here' est interdite dans tous les champs.";
+        feedback.className = "feedback error";
+        return;
+      }
+
+      if (!problemType) {
+        feedback.textContent = "Merci de sélectionner un type de problème.";
+        feedback.className = "feedback error";
+        problemTypeSelect.focus();
+        return;
+      }
+      if (!pseudo || !fortnite || !problem) {
+        feedback.textContent = "Merci de remplir tous les champs obligatoires.";
+        feedback.className = "feedback error";
+        return;
+      }
+
+      feedback.textContent = "Envoi en cours...";
+      feedback.className = "feedback info";
+
+      const emojis = {
+        "Problème session": "🕒",
+        "Problème technique": "⚙️",
+        "Signaler joueur": "🚩",
+        "Recrutement": "🎯",
+        "Autre": "❓"
+      };
+      const emoji = emojis[problemType] || "";
+
+      const WEBHOOK_URL = "https://discord.com/api/webhooks/1371135623053967370/waterVoY1psB38R48x1jaiVTiuPA8UCJjA2jWUOdxhcYn2JKGYKgKPEZbns2RUgSNwlG";
+
+      const body = {
+        username: "Support Web",
+        avatar_url: "https://cdn-icons-png.flaticon.com/512/726/726623.png",
+        embeds: [{
+          title: `${emoji} Nouvelle demande de support - ${problemType}`,
+          color: 0x4f7cff,
+          fields: [
+            { name: "Pseudo Discord", value: pseudo },
+            { name: "Pseudo Fortnite", value: fortnite },
+            { name: "Problème rencontré", value: problem }
+          ],
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+        if (res.ok) {
+          feedback.textContent = "✅ Merci, ton message a bien été envoyé au support Discord. Nous te répondrons dès que possible !";
+          feedback.className = "feedback success";
+          form.reset();
+          localStorage.setItem(COOLDOWN_KEY, Date.now().toString());
+        } else {
+          feedback.textContent = "❌ Erreur lors de l'envoi. Merci de réessayer.";
+          feedback.className = "feedback error";
+        }
+      } catch (err) {
+        feedback.textContent = "❌ Erreur de connexion. Merci de réessayer.";
+        feedback.className = "feedback error";
+      }
+    });
+  </script>
+</body>
+</html>
